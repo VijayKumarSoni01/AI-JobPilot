@@ -1,17 +1,21 @@
-# Environment variables
+# Environment variables and secrets
 .env
 .env.*
 !.env.example
 
-# Java / Maven
+# Java / Maven build output
 **/target/
 
-# IDE
+# IDE settings
 .vscode/
 .idea/
 
 # Logs
 *.log
 
-# tracker files
-*.project-tracker.md
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Private development tracker
+/docs/project-tracker.md
