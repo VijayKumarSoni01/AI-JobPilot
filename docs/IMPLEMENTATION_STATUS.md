@@ -1,32 +1,75 @@
 # Implementation Status - AI JobPilot
 
-> **Status Legend**: ✅ Completed | 🚧 In Progress | ⏳ Pending / Upcoming
+Last verified: 2026-11-06
 
----
+Status definitions:
+- Completed: implementation exists and the stated verification has passed.
+- Implemented, further testing required: source exists but behavior has not been comprehensively tested.
+- Planned: not yet implemented.
 
-## 🟢 Completed (Milestone 1)
-- [x] **Spring Boot Backend Setup**: Initialized project with Java 21 and Maven (`backend/`).
-- [x] **Dependencies Configured**: Added Spring Boot Actuator, Data JPA, Flyway, Security, Validation, WebMVC, MySQL Connector, and Lombok in `pom.xml`.
-- [x] **MySQL & Flyway Integration**:
-  - Configured `application.yaml` with MySQL connection (`aijobpilot`) and `${DB_PASSWORD}` environment variable.
-  - Created Flyway migration script [`V1__create_users_table.sql`](../backend/src/main/resources/db/migration/V1__create_users_table.sql).
-- [x] **Security & Actuator Baseline**: Configured Spring Security and enabled Actuator health checks (`/actuator/health`).
-- [x] **Git & GitHub Repository**: Initialized Git repository, connected to remote `VijayKumarSoni01/AI-JobPilot`, and committed baseline code.
-- [x] **Documentation Structure**: Established multi-agent documentation framework (`AGENTS.md`, `docs/*.md`).
+## 1. Backend Foundation
 
----
+| Item | Status | Notes |
+|---|---|---|
+| Spring Boot application | Completed | Spring Boot 4.0.9, Java 21 |
+| Maven build | Completed | Maven wrapper available |
+| MySQL datasource | Completed | Local MySQL, `aijobpilot` database |
+| Flyway integration | Completed | V1 validated |
+| Hibernate JPA initialization | Completed | `ddl-auto: validate` |
+| Actuator health endpoint | Implemented | `/actuator/health` |
+| Modular monolith structure | Implemented | Layered package structure |
 
-## 🟡 In Progress / Next Steps (Milestone 2)
-- [ ] **User Authentication & Management API**:
-  - Implement `User` entity, `UserRepository`, and `UserService`.
-  - Implement Signup/Login REST endpoints with Spring Security and JWT.
-- [ ] **Job Application CRUD Module**:
-  - Create Flyway migration `V2__create_job_applications_table.sql`.
-  - Implement Job Application Entity, Repository, Service, and Controller.
+## 2. Authentication & Security
 
----
+| Item | Status | Notes |
+|---|---|---|
+| User entity | Completed | Maps to `users` |
+| User repository | Completed | Find and check by email |
+| Signup endpoint | Completed | `POST /api/auth/signup` with validation & exception handling |
+| Login endpoint | Completed | `POST /api/auth/login` with credential verification & status check |
+| BCrypt password hashing | Completed | BCryptPasswordEncoder |
+| JWT generation | Completed | JJWT 0.12.5 |
+| JWT validation | Completed | Custom filter and service with robust exception handling |
+| Stateless security | Completed | SessionCreationPolicy.STATELESS |
+| Account status enforcement | Completed | Checked in `AuthService.login` (`ACTIVE` status check) |
+| Role-based endpoint restrictions | Completed | Secured via Spring Security config and role authorities |
+| Consistent API exception handling | Completed | `GlobalExceptionHandler` returning structured `ErrorResponse` |
+| Authentication unit & service tests | Completed | `JwtServiceTest` and `AuthServiceTest` passing successfully |
 
-## ⏳ Future Milestones (Milestone 3+)
-- [ ] AI Resume Tailoring Service integration.
-- [ ] Interview Question Bank & Mock Interview module.
-- [ ] Frontend Initialization (`frontend/` with React/Next.js).
+## 3. Database
+
+- [x] V1 users migration created.
+- [x] Flyway validates one migration.
+- [x] Schema version 1 is up to date.
+- [x] Hibernate EntityManagerFactory initializes.
+- [x] Job applications migration and user-owned CRUD API.
+- [ ] Resume schema migration.
+
+## 4. Testing
+
+Latest verified command:
+
+```powershell
+cd backend
+.\mvnw.cmd clean test
+```
+
+Result on 2026-11-06: **BUILD SUCCESS** with all unit tests (`JwtServiceTest`, `AuthServiceTest`, `BackendApplicationTests`) passing successfully.
+
+## 5. Not Yet Implemented
+
+- Resume management.
+- AI resume tailoring.
+- Cover letter generation.
+- Interview preparation.
+- Job search analytics.
+- React frontend.
+- External job source integration.
+- User-approved application automation.
+- Production deployment configuration.
+
+## 6. Next Milestone
+
+Implement the **Job Application CRUD Module**:
+1. Create Flyway migration `V2__create_job_applications_table.sql`.
+2. Implement Job Application Entity, Repository, Service, and Controller.

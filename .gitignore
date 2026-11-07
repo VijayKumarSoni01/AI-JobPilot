@@ -1,21 +1,44 @@
-# Environment variables and secrets
+
+# ==========================================
+# Environment Variables and Secrets
+# ==========================================
 .env
 .env.*
 !.env.example
 
-# Java / Maven build output
-**/target/
+# ==========================================
+# Private AI Agent Working Documents
+# ==========================================
+HANDOFF.md
+docs/SESSION_LOG.md
+docs/project-tracker.md
 
-# IDE settings
-.vscode/
+# ==========================================
+# Local AI Agent Configuration
+# ==========================================
+.agent/local/
+.aider*
+
+# ==========================================
+# IDE Configuration
+# ==========================================
+.vscode/*.local.json
 .idea/
 
+# ==========================================
+# Build Output
+# ==========================================
+**/target/
+frontend/node_modules/
+frontend/dist/
+
+# ==========================================
 # Logs
+# ==========================================
 *.log
 
-# OS-generated files
+# ==========================================
+# Operating System Files
+# ==========================================
 .DS_Store
 Thumbs.db
-
-# Private development tracker
-/docs/project-tracker.md
