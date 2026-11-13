@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: application-service
+
+server:
+  port: ${APPLICATION_SERVICE_PORT:8087}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
