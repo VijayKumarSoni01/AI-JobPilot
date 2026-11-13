@@ -72,12 +72,28 @@ This is the single authoritative progress tracker. `docs/DEVELOPMENT_ROADMAP.md`
 - Config Server builds and runs independently with native configuration backend.
 - Auth Service successfully imports externalized configuration from Config Server.
 
+## API Gateway — Week 11
+
+| Day | Work | Status | Evidence / remaining detail |
+|---|---|---|---|
+| 1 | Create `backend/api-gateway` | Complete | `backend/api-gateway` exists with independent Maven project and Spring Cloud Gateway WebFlux. |
+| 2 | Configure Spring Cloud Gateway | Complete | Configured with route predicates and filters. |
+| 3 | Configure discovery-based routing (`lb://ai-jobpilot-auth-service`) | Complete | Gateway registered with Eureka and configured for service-name load-balanced routing. |
+| 4 | JWT validation and trusted header forwarding | Complete | `JwtTokenValidator` and `GatewaySecurityWebFilter` validate tokens and forward user identity/roles. |
+| 5 | CORS, public/protected routes and Redis rate limiting | Complete | Redis container configured in Docker Compose; rate limiter configured for API routes. |
+| 6 | Correlation-ID filter and routing tests | Complete | `CorrelationIdGatewayFilter` added; gateway token validator tests passing. |
+
+### Week 11 acceptance
+
+- API Gateway builds and tests successfully.
+- JWT validation and load-balanced routing to Auth Service configured.
+
 ## Service implementation status
 
 | Project | Status |
 |---|---|
 | `backend/auth-service` | Authentication, JWT, refresh-token lifecycle, Flyway, and tests implemented (29 tests). Configured with Eureka client and Config Server client. |
-| `backend/api-gateway` | Gateway routes/security foundation and JWT validation tests implemented (4 tests). |
+| `backend/api-gateway` | Spring Cloud Gateway implemented with Eureka discovery routing, JWT validation, Redis rate limiting, correlation ID filtering, and tests (4 tests). |
 | `backend/service-discovery` | Eureka Server implemented on port 8761. |
 | `backend/config-server` | Spring Cloud Config Server implemented on port 8888 with native repository `infrastructure/config`. |
 | `backend/user-service` | Buildable project shell; profile functionality not implemented. |
