@@ -7,12 +7,12 @@
 - Reason: Modern Java language/runtime features and the Spring ecosystem.
 - Consequence: Code and dependencies must remain compatible with the selected versions.
 
-## ADR 2: Modular Monolith
+## ADR 2: Microservices Architecture
 
 - Status: Accepted
-- Decision: Build one Spring Boot application with separated layers and feature modules.
-- Reason: Keep initial development and deployment manageable while preserving clear boundaries.
-- Consequence: Do not introduce microservices without an explicit architectural review and approval.
+- Decision: Build a modular microservices platform with an API Gateway and independently deployable business services.
+- Reason: Establish explicit service and data ownership boundaries for the planned product.
+- Consequence: Keep services independently buildable; do not describe scaffold-only services as implemented capabilities. See the architecture ADRs for details.
 
 ## ADR 3: MySQL and Flyway
 
@@ -36,7 +36,8 @@
 - Decision: Use Spring Security stateless sessions and JJWT 0.12.5.
 - A custom `JwtAuthenticationFilter` extracts and validates bearer tokens.
 - BCrypt is used for password hashing.
-- Consequence: Protected API requests must provide valid bearer tokens. Token lifecycle, revocation, and refresh-token behavior require future design.
+- Refresh tokens are rotated and revocable; logout revokes the supplied refresh token.
+- Consequence: Protected API requests must provide valid bearer tokens and token lifecycle behavior must remain covered by tests.
 
 ## ADR 6: React and Vite Frontend
 

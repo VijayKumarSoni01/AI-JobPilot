@@ -1,88 +1,36 @@
-# Development Roadmap - AI JobPilot
+# Development Roadmap
 
-## Phase 1: Backend Foundation
+This document records the intended sequence, not completion status. The verified progress tracker is [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 
-Status: Completed.
+## Completed foundation work
 
-- Initialize Spring Boot 4.0.9 with Java 21.
-- Configure Maven.
-- Configure local MySQL.
-- Integrate Flyway.
-- Create V1 users migration.
-- Configure Spring Data JPA.
-- Configure Spring Security baseline.
-- Add Actuator health endpoint.
+- Product requirements and microservice boundaries.
+- Repository and service-project setup.
+- Microservice fundamentals, shared service template, conventions, and backend CI.
+- Auth Service foundation and authentication security.
+- API Gateway authentication/routing foundation.
 
-## Phase 2: Authentication & Security Hardening
+## Next platform milestones
 
-Status: Completed.
+1. Implement Eureka Service Discovery and register Auth Service.
+2. Implement Spring Cloud Config Server and external configuration loading.
+3. Integrate Gateway with discovery-based service routing and add end-to-end route tests.
+4. Implement User Profile Service and its owned database.
 
-- Signup and login REST APIs (`/api/auth/signup`, `/api/auth/login`).
-- BCrypt password hashing.
-- JWT generation and validation (JJWT 0.12.5).
-- Stateless Spring Security filter chain (`JwtAuthenticationFilter`).
-- Account status enforcement (`ACTIVE` status check).
-- Role-based authorization.
-- Consistent API exception handling (`GlobalExceptionHandler`, `ErrorResponse`).
-- Automated unit and service test coverage (`JwtServiceTest`, `AuthServiceTest`) verified with `BUILD SUCCESS`.
+## Business-service sequence
 
-## Phase 3: Job Application Management
+1. User Profile Service.
+2. Resume Service and private document storage.
+3. Job Service and discovery/filtering.
+4. Kafka foundations and versioned event contracts.
+5. Matching Service.
+6. AI Service with user-review workflow.
+7. Application Service with ownership and confirmation controls.
+8. Notification Service.
 
-Status: Next (In Progress / Upcoming).
+## Client and production readiness
 
-- Design V2 migration for job applications (`job_applications` table).
-- Implement entity and repository.
-- Implement service and DTOs.
-- Implement create, read, update, and delete APIs.
-- Enforce user ownership.
-- Add validation and integration tests.
-- Add pagination and filtering.
+- Build the React + Vite + TypeScript frontend after stable APIs are available.
+- Add full local stack orchestration, CI, monitoring, security/failure testing, and deployment.
 
-## Phase 4: Resume and Career Documents
-
-Status: Planned.
-
-- Design resume data model and storage approach.
-- Implement resume CRUD.
-- Support resume versions.
-- Add cover letter management.
-
-## Phase 5: AI Features
-
-Status: Planned.
-
-- Define AI provider integration boundary.
-- Implement resume tailoring.
-- Generate cover letter drafts.
-- Generate interview questions.
-- Add user review and approval workflows.
-- Track AI usage and handle provider failures.
-
-## Phase 6: Frontend
-
-Status: Planned.
-
-- Initialize React + Vite + TypeScript.
-- Configure Tailwind CSS.
-- Build authentication screens.
-- Build dashboard.
-- Build job application tracker.
-- Build resume and interview interfaces.
-- Integrate backend APIs.
-
-## Phase 7: Testing and Production Readiness
-
-Status: Planned.
-
-- Unit and integration tests.
-- Security testing.
-- Database migration testing.
-- API documentation.
-- Logging and observability.
-- Production configuration and secrets management.
-- Containerization and deployment.
-- CI/CD pipeline.
-
-## Development Rule
-
-Complete and verify each phase before marking it done. Keep the implementation status document synchronized with actual source code and test results.
+Complete and test each milestone before marking it implemented.

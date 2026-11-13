@@ -1,0 +1,6 @@
+server:
+  port: ${AUTH_SERVICE_PORT:8081}
+
+jwt:
+  expiration: ${JWT_EXPIRATION_TIME:900000}
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION_TIME:2592000000}
