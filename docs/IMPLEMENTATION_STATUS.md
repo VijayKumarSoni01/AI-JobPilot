@@ -88,6 +88,22 @@ This is the single authoritative progress tracker. `docs/DEVELOPMENT_ROADMAP.md`
 - API Gateway builds and tests successfully.
 - JWT validation and load-balanced routing to Auth Service configured.
 
+## User Profile Service — Week 12
+
+| Day | Work | Status | Evidence / remaining detail |
+|---|---|---|---|
+| 1 | Create `user-service` and database | Complete | `backend/user-service` configured with Data JPA, Flyway, MySQL driver, and Eureka client. |
+| 2 | Design profile entities | Complete | `UserProfile` entity created linking to `user_id` with headline, summary, location, and phone. |
+| 3 | Profile creation and retrieval | Complete | `UserProfileService` upserts and retrieves profiles backed by Flyway migration `V1__create_user_profiles_table.sql`. |
+| 4 | Profile update and deletion rules | Complete | Implemented via `UserProfileController` at `/api/profiles/{userId}`. |
+| 5 | Request validation and DTOs | Complete | `UserProfileRequest` and `UserProfileResponse` configured with Bean Validation. |
+| 6 | Gateway integration and testing | Complete | Gateway configured with route `/api/profiles/**` pointing to `lb://user-service`; `UserServiceApplicationTests` passing. |
+
+### Week 12 acceptance
+
+- User Profile Service builds and tests successfully.
+- Database ownership (`user_db`), migration, entity, repository, service, and controller are implemented.
+
 ## Service implementation status
 
 | Project | Status |
@@ -96,7 +112,7 @@ This is the single authoritative progress tracker. `docs/DEVELOPMENT_ROADMAP.md`
 | `backend/api-gateway` | Spring Cloud Gateway implemented with Eureka discovery routing, JWT validation, Redis rate limiting, correlation ID filtering, and tests (4 tests). |
 | `backend/service-discovery` | Eureka Server implemented on port 8761. |
 | `backend/config-server` | Spring Cloud Config Server implemented on port 8888 with native repository `infrastructure/config`. |
-| `backend/user-service` | Buildable project shell; profile functionality not implemented. |
+| `backend/user-service` | User Profile Service implemented with `user_db` ownership, Flyway migration, `UserProfile` entity, REST API (`/api/profiles`), and test suite. |
 | `backend/resume-service` | Buildable project shell; resume functionality not implemented. |
 | `backend/job-service` | Buildable project shell; job catalog functionality not implemented. |
 | `backend/matching-service` | Buildable project shell; matching functionality not implemented. |
